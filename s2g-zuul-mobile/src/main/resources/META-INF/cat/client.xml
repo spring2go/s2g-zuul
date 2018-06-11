@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config mode="client" enabled="true">
+
+    <!-- 配置Domain ID-->
+    <domain id="mobile_zuul.spring2go.com" enabled="true" max-message-size="1000"/>
+
+    <servers>
+        <server ip="cat.spring2go.com" port="2280" http-port="80"></server>
+    </servers>
+</config>
