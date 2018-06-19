@@ -9,7 +9,7 @@ import io.spring2go.zuul.common.Constants;
 import io.spring2go.zuul.common.IZuulFilterDao;
 
 public class ZuulFilterDaoFactory {
-    private static final DynamicStringProperty daoType = DynamicPropertyFactory.getInstance().getStringProperty(Constants.ZuulFilterDaoType, "jdbc");
+    private static final DynamicStringProperty daoType = DynamicPropertyFactory.getInstance().getStringProperty(Constants.ZUUL_FILTER_DAO_TYPE, "jdbc");
     
     private static ConcurrentMap<String, IZuulFilterDao> daoCache = Maps.newConcurrentMap();
 

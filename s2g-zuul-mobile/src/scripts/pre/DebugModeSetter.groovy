@@ -9,7 +9,7 @@ import io.spring2go.zuul.filters.ZuulFilter
 class DebugModeSetter extends ZuulFilter {
 
     static final DynamicBooleanProperty couldSetDebug =
-            DynamicPropertyFactory.getInstance().getBooleanProperty("zuul.could.set.debug", false);
+            DynamicPropertyFactory.getInstance().getBooleanProperty("zuul.could.set.debug", true);
     static final DynamicBooleanProperty routingDebug =
             DynamicPropertyFactory.getInstance().getBooleanProperty("zuul.debug.request", false);
     static final DynamicStringProperty debugParameter =

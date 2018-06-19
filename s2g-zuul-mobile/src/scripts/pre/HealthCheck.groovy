@@ -14,13 +14,13 @@ public class HealthCheck extends ZuulFilter{
 	}
 	
 	public Object uri() {
-		return "/hs";
+		return "/hc";
 	}
 	
 	@Override
 	boolean shouldFilter() {
 		String path = RequestContext.currentContext.getRequest().getRequestURI()
-		return path.equalsIgnoreCase(uri())||path.equalsIgnoreCase("/");
+		return path.equalsIgnoreCase(uri())||path.toLowerCase().endsWith(uri());
 	}
 	
 	public int filterOrder(){

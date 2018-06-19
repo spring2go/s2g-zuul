@@ -12,32 +12,32 @@ import com.zaxxer.hikari.HikariDataSource;
 
 public class JDBCZuulFilterDaoBuilder implements IZuulFilterDaoBuilder {
 	private static final DynamicStringProperty dataSourceClass = DynamicPropertyFactory.getInstance()
-			.getStringProperty(Constants.DataSourceClassName, null);
+			.getStringProperty(Constants.DATA_SOURCE_CLASS_NAME, null);
 	private static final DynamicStringProperty url = DynamicPropertyFactory.getInstance()
-			.getStringProperty(Constants.DataSourceUrl, null);
+			.getStringProperty(Constants.DATA_SOURCE_URL, null);
 	private static final DynamicStringProperty user = DynamicPropertyFactory.getInstance()
-			.getStringProperty(Constants.DataSourceUser, null);
+			.getStringProperty(Constants.DATA_SOURCE_USER, null);
 	private static final DynamicStringProperty password = DynamicPropertyFactory.getInstance()
-			.getStringProperty(Constants.DataSourcePasswd, null);
+			.getStringProperty(Constants.DATA_SOURCE_PASSWORD, null);
 	private static final DynamicIntProperty minPoolSize = DynamicPropertyFactory.getInstance()
-			.getIntProperty(Constants.DataSourceMinPoolSize, 10);
+			.getIntProperty(Constants.DATA_SOURCE_MIN_POOL_SIZE, 10);
 	private static final DynamicIntProperty maxPoolSize = DynamicPropertyFactory.getInstance()
-			.getIntProperty(Constants.DataSourceMaxPoolSize, 20);
+			.getIntProperty(Constants.DATA_SOURCE_MAX_POOL_SIZE, 20);
 	private static final DynamicLongProperty connectionTimeout = DynamicPropertyFactory.getInstance()
-			.getLongProperty(Constants.DataSourceConnectTimeOut, 1000);
+			.getLongProperty(Constants.DATA_SOURCE_CONNECT_TIMEOUT, 1000);
 	private static final DynamicLongProperty idleTimeout = DynamicPropertyFactory.getInstance()
-			.getLongProperty(Constants.DataSourceIdleTimeOut, 600000);
+			.getLongProperty(Constants.DATA_SOURCE_IDLE_TIMEOUT, 600000);
 	private static final DynamicLongProperty maxLifetime = DynamicPropertyFactory.getInstance()
-			.getLongProperty(Constants.DataSourceMaxLifeTime, 1800000);
+			.getLongProperty(Constants.DATA_SOURCE_MAX_LIFETIME, 1800000);
 
-	private static final DynamicStringProperty environment = DynamicPropertyFactory.getInstance()
-			.getStringProperty(Constants.DeployEnvironment, "test");
+//	private static final DynamicStringProperty environment = DynamicPropertyFactory.getInstance()
+//			.getStringProperty(Constants.DEPLOY_ENVIRONMENT, "test");
 
 	private static final DynamicStringProperty filterTableName = DynamicPropertyFactory.getInstance()
-			.getStringProperty(Constants.FilterTableName, null);
+			.getStringProperty(Constants.FILTER_TABLE_NAME, null);
 	
 	private static final DynamicStringProperty appName = DynamicPropertyFactory.getInstance()
-			.getStringProperty(Constants.DeploymentApplicationID, Constants.ApplicationName);
+			.getStringProperty(Constants.DEPLOYMENT_APPLICATION_ID, Constants.APPLICATION_NAME);
 
 	private HikariDataSource dataSource;
 	private String filterTable;
@@ -56,7 +56,7 @@ public class JDBCZuulFilterDaoBuilder implements IZuulFilterDaoBuilder {
 		config.setMaxLifetime(maxLifetime.get());
 
 		this.dataSource = new HikariDataSource(config);
-		this.filterTable = filterTableName.get() + "_" + environment.get();
+		this.filterTable = filterTableName.get(); //+ "_" + environment.get();
 	}
 
 	@Override

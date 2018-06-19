@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory
 import io.spring2go.zuul.common.ZuulException
 import io.spring2go.zuul.context.RequestContext
 import io.spring2go.zuul.filters.ZuulFilter
-import io.spring2go.zuul.monitor.MetricReporter
 
 /**
  * Generate a error response while there is an error.
@@ -54,12 +53,6 @@ class ErrorResponse extends ZuulFilter {
 				logger.error(sb.toString());
             }else{
                 responseStatusCode = 500;
-            }
-
-            if (responseStatusCode == 404) {
-				MetricReporter.statRouteErrorStatus("ROUTE_NOT_FOUND", errorCause)
-            } else {
-                MetricReporter.statRouteErrorStatus(ctx.routeName, errorCause)
             }
 
             ctx.setResponseStatusCode(responseStatusCode);

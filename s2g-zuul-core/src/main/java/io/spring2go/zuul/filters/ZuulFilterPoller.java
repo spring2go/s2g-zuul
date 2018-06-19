@@ -27,26 +27,26 @@ public class ZuulFilterPoller {
 	private Map<String, FilterInfo> runningFilters = Maps.newHashMap();
 
 	private DynamicBooleanProperty pollerEnabled = DynamicPropertyFactory.getInstance()
-			.getBooleanProperty(Constants.ZuulFilterPollerEnabled, true);
+			.getBooleanProperty(Constants.ZUUL_FILTER_POLLER_ENABLED, true);
 
 	private DynamicLongProperty pollerInterval = DynamicPropertyFactory.getInstance()
-			.getLongProperty(Constants.ZuulFilterPollerInterval, 30000);
+			.getLongProperty(Constants.ZUUL_FILTER_POLLER_INTERVAL, 30000);
 
 	private DynamicBooleanProperty active = DynamicPropertyFactory.getInstance()
-			.getBooleanProperty(Constants.ZuulUseActiveFilters, true);
+			.getBooleanProperty(Constants.ZUUL_USE_ACTIVE_FILTERS, true);
 	private DynamicBooleanProperty canary = DynamicPropertyFactory.getInstance()
-			.getBooleanProperty(Constants.ZuulUseCanaryFilters, false);
+			.getBooleanProperty(Constants.ZUUL_USE_CANARY_FILTERS, false);
 
 	private DynamicStringProperty preFiltersPath = DynamicPropertyFactory.getInstance()
-			.getStringProperty(Constants.ZuulFilterPrePath, null);
+			.getStringProperty(Constants.ZUUL_FILTER_PRE_PATH, null);
 	private DynamicStringProperty routeFiltersPath = DynamicPropertyFactory.getInstance()
-			.getStringProperty(Constants.ZuulFilterRoutePath, null);
+			.getStringProperty(Constants.ZUUL_FILTER_ROUTE_PATH, null);
 	private DynamicStringProperty postFiltersPath = DynamicPropertyFactory.getInstance()
-			.getStringProperty(Constants.ZuulFilterPostPath, null);
+			.getStringProperty(Constants.ZUUL_FILTER_POST_PATH, null);
 	private DynamicStringProperty errorFiltersPath = DynamicPropertyFactory.getInstance()
-			.getStringProperty(Constants.ZuulFilterErrorPath, null);
+			.getStringProperty(Constants.ZUUL_FILTER_ERROR_PATH, null);
 	private DynamicStringProperty customFiltersPath = DynamicPropertyFactory.getInstance()
-			.getStringProperty(Constants.ZuulFilterCustomPath, null);
+			.getStringProperty(Constants.Zuul_FILTER_CUSTOM_PATH, null);
 
 	private static ZuulFilterPoller instance = null;
 

@@ -29,7 +29,8 @@ public class LogConfigurator {
                 joranConfigurator.setContext(lc);
                 lc.reset();
 
-                String configFileName = appName + "-logback-" + environment + ".xml";
+                
+                String configFileName = appName + "-logback" + (environment != null ? "-" + environment : "")  + ".xml";
                 InputStream inputStream = LogConfigurator.class.getClassLoader().getResourceAsStream(configFileName);
 
                 if (inputStream == null) {

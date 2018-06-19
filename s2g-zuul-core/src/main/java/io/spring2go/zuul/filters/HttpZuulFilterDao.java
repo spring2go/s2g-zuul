@@ -35,7 +35,7 @@ import io.spring2go.zuul.common.IZuulFilterDao;
 public class HttpZuulFilterDao implements IZuulFilterDao {
 	private static final Logger LOGGER = LoggerFactory.getLogger(HttpZuulFilterDao.class);
 	
-    private DynamicStringProperty filterRepository = DynamicPropertyFactory.getInstance().getStringProperty(Constants.ZuulFilterRepo, "http://localhost:8080/filters");
+    private DynamicStringProperty filterRepository = DynamicPropertyFactory.getInstance().getStringProperty(Constants.ZUUL_FILTER_REPO, "http://localhost:8080/filters");
     private String applicationName;
     private CloseableHttpClient httpclient;
 	public HttpZuulFilterDao(String applicationName){

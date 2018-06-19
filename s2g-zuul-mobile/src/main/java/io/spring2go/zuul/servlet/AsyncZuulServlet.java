@@ -32,10 +32,10 @@ public class AsyncZuulServlet extends HttpServlet {
 
 	private static Logger LOGGER = LoggerFactory.getLogger(AsyncZuulServlet.class);
 	
-	private DynamicIntProperty asyncTimeout = DynamicPropertyFactory.getInstance().getIntProperty(Constants.ZuulServletAsyncTimeOut, 20000);
-	private DynamicIntProperty coreSize = DynamicPropertyFactory.getInstance().getIntProperty(Constants.ZuulThreadPoolCodeSize, 200);
-	private DynamicIntProperty maximumSize = DynamicPropertyFactory.getInstance().getIntProperty(Constants.ZuulThreadPoolMaxSize, 2000);
-	private DynamicLongProperty aliveTime = DynamicPropertyFactory.getInstance().getLongProperty(Constants.ZuulThreadPoolAliveTime, 1000 * 60 * 5);
+	private DynamicIntProperty asyncTimeout = DynamicPropertyFactory.getInstance().getIntProperty(Constants.ZUUL_SERVLET_ASYNC_TIMEOUT, 20000);
+	private DynamicIntProperty coreSize = DynamicPropertyFactory.getInstance().getIntProperty(Constants.ZUUL_THREADPOOL_CODE_SIZE, 200);
+	private DynamicIntProperty maximumSize = DynamicPropertyFactory.getInstance().getIntProperty(Constants.ZUUL_THREADPOOL_MAX_SIZE, 2000);
+	private DynamicLongProperty aliveTime = DynamicPropertyFactory.getInstance().getLongProperty(Constants.ZUUL_THREADPOOL_ALIVE_TIME, 1000 * 60 * 5);
 	
 	private ZuulRunner zuulRunner = new ZuulRunner();
 	private AtomicReference<ThreadPoolExecutor> poolExecutorRef = new AtomicReference<ThreadPoolExecutor>();	    

@@ -8,7 +8,7 @@ import com.netflix.config.DynamicPropertyFactory
 import com.netflix.util.Pair
 import io.spring2go.zuul.context.RequestContext
 import io.spring2go.zuul.filters.ZuulFilter
-import io.spring2go.util.Debug
+import io.spring2go.zuul.util.Debug
 
 class DebugResponse extends ZuulFilter {
     private static final Logger LOGGER = LoggerFactory.getLogger(DebugResponse.class);

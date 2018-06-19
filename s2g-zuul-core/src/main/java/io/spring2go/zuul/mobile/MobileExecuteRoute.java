@@ -54,9 +54,9 @@ import io.spring2go.zuul.util.HTTPRequestUtil;
 
 public class MobileExecuteRoute extends ZuulFilter {
 	private static final DynamicIntProperty maxConnection = DynamicPropertyFactory.getInstance()
-			.getIntProperty(Constants.ZuulClientMaxConnections, 500);
+			.getIntProperty(Constants.ZUUL_CLIENT_MAX_CONNECTIONS, 500);
 	private static final DynamicIntProperty maxRouteConnection = DynamicPropertyFactory.getInstance()
-			.getIntProperty(Constants.ZuulClientRouteMaxConnections, 20);
+			.getIntProperty(Constants.ZUUL_CLIENT_ROUTE_MAX_CONNECTIONS, 20);
 
 	private static final Runnable loader = new Runnable() {
 		@Override
@@ -173,9 +173,9 @@ public class MobileExecuteRoute extends ZuulFilter {
 			routeName = ctx.getRouteName();
 
 			if (groupName == null)
-				groupName = Constants.DefaultGroup;
+				groupName = Constants.DEFAULT_GROUP;
 			if (routeName == null)
-				routeName = Constants.DefaultName;
+				routeName = Constants.DEFAULT_NAME;
 			RequestConfig requestConfig = buildRequestConfig(routeName, groupName);
 			String verb = request.getMethod().toUpperCase();
 

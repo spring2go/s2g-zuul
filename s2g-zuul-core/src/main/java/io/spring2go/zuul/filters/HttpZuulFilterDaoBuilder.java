@@ -9,7 +9,7 @@ import io.spring2go.zuul.common.IZuulFilterDaoBuilder;
 public class HttpZuulFilterDaoBuilder implements IZuulFilterDaoBuilder {
 
 	private static final DynamicStringProperty appName = DynamicPropertyFactory.getInstance()
-			.getStringProperty(Constants.DeploymentApplicationID, Constants.ApplicationName);
+			.getStringProperty(Constants.DEPLOYMENT_APPLICATION_ID, Constants.APPLICATION_NAME);
 
 	public HttpZuulFilterDaoBuilder() {
 

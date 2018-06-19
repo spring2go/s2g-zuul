@@ -2,8 +2,6 @@ package io.spring2go.zuul.mobile;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.netflix.config.DynamicBooleanProperty;
-import com.netflix.config.DynamicPropertyFactory;
 import io.spring2go.zuul.context.RequestContext;
 import io.spring2go.zuul.filters.ZuulFilter;
 

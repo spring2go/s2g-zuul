@@ -50,14 +50,14 @@ public class InitializeServletListener implements ServletContextListener {
 	private InfoBoard internalsServer;
 	
 	public InitializeServletListener() {
-//		System.setProperty(Constants.DeployEnvironment, "test");
+//		System.setProperty(Constants.DEPLOY_ENVIRONMENT, "test");
 //		System.setProperty(Constants.DeploymentApplicationID, "mobile_zuul");
 //		System.setProperty(Constants.DeployConfigUrl, "http://192.168.2.100:8080/configs/apollo/mobile_zuul");			
-		String applicationID = ConfigurationManager.getConfigInstance().getString(Constants.DeploymentApplicationID);
+		String applicationID = ConfigurationManager.getConfigInstance().getString(Constants.DEPLOYMENT_APPLICATION_ID);
 		if (StringUtils.isEmpty(applicationID)) {
 			LOGGER.warn("Using default config!");		
-			ConfigurationManager.getConfigInstance().setProperty(Constants.DeployConfigUrl, "http://192.168.2.100:8080/configs/apollo/mobile_zuul");	
-			ConfigurationManager.getConfigInstance().setProperty(Constants.DeploymentApplicationID, "mobile_zuul");
+			ConfigurationManager.getConfigInstance().setProperty(Constants.DEPLOY_CONFIG_URL, "http://192.168.2.100:8080/configs/apollo/mobile_zuul");	
+			ConfigurationManager.getConfigInstance().setProperty(Constants.DEPLOYMENT_APPLICATION_ID, "mobile_zuul");
 		}
 		
 		System.setProperty(DynamicPropertyFactory.ENABLE_JMX, "true");
@@ -72,12 +72,19 @@ public class InitializeServletListener implements ServletContextListener {
         try {
         	initInfoBoard();
             initMonitor();
-            initZuul();        
-            ApplicationInfoManager.getInstance().setInstanceStatus(InstanceInfo.InstanceStatus.UP);
+            initZuul();
+            updateInstanceStatusToEureka();
         } catch (Exception e) {
         	LOGGER.error("Error while initializing zuul gateway.", e);
         	throw new RuntimeException(e);
         }
+	}
+	
+	private void updateInstanceStatusToEureka() {
+		DynamicBooleanProperty eurekaEnabled = DynamicPropertyFactory.getInstance().getBooleanProperty("eureka.enabled",
+				true);
+		if (!eurekaEnabled.get()) return;
+        ApplicationInfoManager.getInstance().setInstanceStatus(InstanceInfo.InstanceStatus.UP);
 	}
 	
 	private void initInfoBoard() {
@@ -112,11 +119,11 @@ public class InitializeServletListener implements ServletContextListener {
     private void initZuul() throws Exception {
         LOGGER.info("Starting Groovy Filter file manager");
         final AbstractConfiguration config = ConfigurationManager.getConfigInstance();
-        final String preFiltersPath = config.getString(Constants.ZuulFilterPrePath);
-        final String postFiltersPath = config.getString(Constants.ZuulFilterPostPath);
-        final String routeFiltersPath = config.getString(Constants.ZuulFilterRoutePath);
-        final String errorFiltersPath = config.getString(Constants.ZuulFilterErrorPath);
-        final String customPath = config.getString(Constants.ZuulFilterCustomPath);
+        final String preFiltersPath = config.getString(Constants.ZUUL_FILTER_PRE_PATH);
+        final String postFiltersPath = config.getString(Constants.ZUUL_FILTER_POST_PATH);
+        final String routeFiltersPath = config.getString(Constants.ZUUL_FILTER_ROUTE_PATH);
+        final String errorFiltersPath = config.getString(Constants.ZUUL_FILTER_ERROR_PATH);
+        final String customPath = config.getString(Constants.Zuul_FILTER_CUSTOM_PATH);
 
         //load local filter files
         FilterLoader.getInstance().setCompiler(new GroovyCompiler());

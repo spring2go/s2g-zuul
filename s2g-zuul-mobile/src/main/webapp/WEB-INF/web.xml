@@ -6,12 +6,12 @@
 	<display-name>zuul-gateway</display-name>
 
 	<servlet>
-		<servlet-name>AsyncZuulServlet</servlet-name>
-		<servlet-class>io.spring2go.zuul.servlet.AsyncZuulServlet</servlet-class>
-		<async-supported>true</async-supported>
+		<servlet-name>SyncZuulServlet</servlet-name>
+		<servlet-class>io.spring2go.zuul.servlet.SyncZuulServlet</servlet-class>
+		<!--async-supported>true</async-supported-->
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>AsyncZuulServlet</servlet-name>
+		<servlet-name>SyncZuulServlet</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 
@@ -19,12 +19,31 @@
 		<listener-class>io.spring2go.zuul.servlet.InitializeServletListener</listener-class>
 	</listener>
 
-	<filter>
+	<!--filter>
 		<filter-name>CatFilter</filter-name>
 		<filter-class>io.spring2go.zuul.servlet.CatServletFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>CatFilter</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	</filter-mapping-->
+
+    <servlet>
+        <servlet-name>scriptManager</servlet-name>
+        <servlet-class>io.spring2go.zuul.filters.FilterScriptManagerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>scriptManager</servlet-name>
+        <url-pattern>/admin/scriptmanager</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>filterLoader</servlet-name>
+        <jsp-file>/admin/filterLoader.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>filterLoader</servlet-name>
+        <url-pattern>/admin/filterLoader.jsp</url-pattern>
+    </servlet-mapping>
+
 </web-app>

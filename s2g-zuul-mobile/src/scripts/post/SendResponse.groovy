@@ -15,9 +15,9 @@ import io.spring2go.zuul.context.RequestContext
 import io.spring2go.zuul.filters.ZuulFilter
 
 public class SendResponse extends ZuulFilter {
-	private static final DynamicIntProperty BUFFER_SIZE = DynamicPropertyFactory.getInstance().getIntProperty(Constants.ZuulInitialStreamBufferSize, 1024);
+	private static final DynamicIntProperty BUFFER_SIZE = DynamicPropertyFactory.getInstance().getIntProperty(Constants.ZUUL_INITIAL_STREAM_BUFFER_SIZE, 1024);
 
-    private static final DynamicBooleanProperty CONTENT_LENGTH = DynamicPropertyFactory.getInstance().getBooleanProperty(Constants.ZuulSetContentLength, false);
+    private static final DynamicBooleanProperty CONTENT_LENGTH = DynamicPropertyFactory.getInstance().getBooleanProperty(Constants.ZUUL_SET_CONTENT_LENGTH, false);
 	
 	@Override
 	public String filterType() {
