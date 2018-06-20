@@ -67,12 +67,6 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>io.spring2go.metrics</groupId>
-				<artifactId>spring2go-metrics</artifactId>
-				<version>${spring2go-metrics.version}</version>
-			</dependency>
-
-			<dependency>
 				<groupId>io.spring2go.tools</groupId>
 				<artifactId>spring2go-tools</artifactId>
 				<version>${spring2go-tools.version}</version>

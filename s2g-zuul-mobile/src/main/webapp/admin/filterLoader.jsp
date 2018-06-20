@@ -22,7 +22,7 @@
 %>
 <html>
 <head>
-    <title></title>
+    <title>Spring2go Filter Manager</title>
 </head>
 <body>
 

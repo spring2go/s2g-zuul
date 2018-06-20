@@ -13,11 +13,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>io.spring2go.metrics</groupId>
-			<artifactId>spring2go-metrics</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>io.spring2go.tools</groupId>
 			<artifactId>spring2go-tools</artifactId>
 		</dependency>
