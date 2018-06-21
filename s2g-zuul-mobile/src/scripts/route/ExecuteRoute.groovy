@@ -45,8 +45,8 @@ import io.spring2go.zuul.util.HTTPRequestUtil
 
 public class ExecuteRoute extends ZuulFilter{
 	private static Logger logger = LoggerFactory.getLogger(ExecuteRoute.class);
-	private static final DynamicIntProperty MAX_CONNECTIONS = DynamicPropertyFactory.getInstance().getIntProperty(Constants.ZuulClientMaxConnections, 500)
-	private static final DynamicIntProperty MAX_CONNECTIONS_PER_ROUTE = DynamicPropertyFactory.getInstance().getIntProperty(Constants.ZuulClientRouteMaxConnections, 20)
+	private static final DynamicIntProperty MAX_CONNECTIONS = DynamicPropertyFactory.getInstance().getIntProperty(Constants.ZUUL_CLIENT_MAX_CONNECTIONS, 500)
+	private static final DynamicIntProperty MAX_CONNECTIONS_PER_ROUTE = DynamicPropertyFactory.getInstance().getIntProperty(Constants.ZUUL_CLIENT_ROUTE_MAX_CONNECTIONS, 20)
 	private static final DynamicBooleanProperty DEBUG_ROUTE = DynamicPropertyFactory.getInstance().getBooleanProperty("zuul.debug.thread.route", false);
 
 	private static final Runnable loader = new Runnable() {
@@ -159,8 +159,8 @@ public class ExecuteRoute extends ZuulFilter{
 		String groupName = ctx.getRouteGroup();
 		String routeName = ctx.getRouteName();
 		
-		if (groupName == null) groupName = Constants.DefaultGroup;
-		if (routeName == null) routeName = Constants.DefaultName;
+		if (groupName == null) groupName = Constants.DEFAULT_GROUP;
+		if (routeName == null) routeName = Constants.DEFAULT_NAME;
 		try{
 			
 			if(DEBUG_ROUTE.get()){

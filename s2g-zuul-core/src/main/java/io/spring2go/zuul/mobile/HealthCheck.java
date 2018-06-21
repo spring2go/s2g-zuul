@@ -13,7 +13,7 @@ public class HealthCheck extends ZuulFilter{
 	}
 	
 	public String uri() {
-		return "/";
+		return "/healthcheck";
 	}
 	
 	@Override
@@ -27,7 +27,7 @@ public class HealthCheck extends ZuulFilter{
 	}
 	
 	public String responseBody() {
-		return "OK";
+		return "<health>ok</health>";
 	}
 	
 	@Override
@@ -35,6 +35,7 @@ public class HealthCheck extends ZuulFilter{
 		RequestContext ctx = RequestContext.getCurrentContext();
 		// Set the default response code for static filters to be 200
 		ctx.getResponse().setStatus(HttpServletResponse.SC_OK);
+		ctx.getResponse().setContentType("application/xml");
 		// first StaticResponseFilter instance to match wins, others do not set body and/or status
 		if (ctx.getResponseBody() == null) {
 			ctx.setResponseBody(responseBody());
