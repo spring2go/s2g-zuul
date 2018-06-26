@@ -24,9 +24,11 @@ public class ZuulCallable implements Callable {
 
 	private AsyncContext ctx;
 	private ZuulRunner zuulRunner;
-	private Context catCtx ;
+	private Context catCtx;
 	private HttpServletRequest request;
-	public ZuulCallable(Context catContext,AsyncContext asyncContext, ZuulRunner zuulRunner,HttpServletRequest request) {
+
+	public ZuulCallable(Context catContext, AsyncContext asyncContext, ZuulRunner zuulRunner,
+			HttpServletRequest request) {
 		this.ctx = asyncContext;
 		this.zuulRunner = zuulRunner;
 		this.catCtx = catContext;
@@ -37,7 +39,8 @@ public class ZuulCallable implements Callable {
 	public Object call() throws Exception {
 		Cat.logRemoteCallServer(catCtx);
 		RequestContext.getCurrentContext().unset();
-		Transaction tran = ((DefaultMessageProducer)Cat.getProducer()).newTransaction("ZuulCallable", request.getRequestURL().toString());
+		Transaction tran = ((DefaultMessageProducer) Cat.getProducer()).newTransaction("ZuulCallable",
+				request.getRequestURL().toString());
 		RequestContext zuulContext = RequestContext.getCurrentContext();
 		long start = System.currentTimeMillis();
 		try {
@@ -48,18 +51,18 @@ public class ZuulCallable implements Callable {
 			Cat.logError(t);
 			tran.setStatus(t);
 		} finally {
-            try {
-            	reportStat(zuulContext, start);
-            } catch (Throwable t) {
-            	Cat.logError("ZuulCallable collect stats error.", t);
-            }
-            try {
-                ctx.complete();
-            } catch (Throwable t) {
-                Cat.logError("AsyncContext complete error.", t);
-            }
+			try {
+				reportStat(zuulContext, start);
+			} catch (Throwable t) {
+				Cat.logError("ZuulCallable collect stats error.", t);
+			}
+			try {
+				ctx.complete();
+			} catch (Throwable t) {
+				Cat.logError("AsyncContext complete error.", t);
+			}
 			zuulContext.unset();
-		
+
 			tran.complete();
 		}
 		return null;
@@ -112,10 +115,10 @@ public class ZuulCallable implements Callable {
 		try {
 			zuulRunner.postRoute();
 			tran.setStatus(Transaction.SUCCESS);
-		} catch(Throwable e){
+		} catch (Throwable e) {
 			tran.setStatus(e);
 			throw e;
-		}finally {
+		} finally {
 			tran.complete();
 		}
 	}
@@ -130,10 +133,10 @@ public class ZuulCallable implements Callable {
 		try {
 			zuulRunner.route();
 			tran.setStatus(Transaction.SUCCESS);
-		} catch(Throwable e){
+		} catch (Throwable e) {
 			tran.setStatus(e);
 			throw e;
-		}finally {
+		} finally {
 			tran.complete();
 		}
 	}
@@ -148,10 +151,10 @@ public class ZuulCallable implements Callable {
 		try {
 			zuulRunner.preRoute();
 			tran.setStatus(Transaction.SUCCESS);
-		} catch(Throwable e){
+		} catch (Throwable e) {
 			tran.setStatus(e);
 			throw e;
-		}finally {
+		} finally {
 			tran.complete();
 		}
 	}
@@ -177,9 +180,9 @@ public class ZuulCallable implements Callable {
 			RequestContext.getCurrentContext().setThrowable(e);
 			zuulRunner.error();
 			tran.setStatus(Transaction.SUCCESS);
-		}catch(Throwable t){ 
+		} catch (Throwable t) {
 			Cat.logError(t);
-		}finally {
+		} finally {
 			tran.complete();
 			Cat.logError(e);
 		}
@@ -223,10 +226,12 @@ public class ZuulCallable implements Callable {
 			}
 		}
 
-		String routeName = zuulContext.getRouteName();
-		if (routeName == null || routeName.equals("")) {
-			routeName = "unknown";
-			LOGGER.warn("Unknown Route: [ {"+ zuulContext.getRequest().getRequestURL()+"} ]");
+		if (zuulContext.sendZuulResponse()) {
+			String routeName = zuulContext.getRouteName();
+			if (routeName == null || routeName.equals("")) {
+				routeName = "unknown";
+				LOGGER.warn("Unknown Route: [ {" + zuulContext.getRequest().getRequestURL() + "} ]");
+			}
 		}
 
 		// TODO report metrics

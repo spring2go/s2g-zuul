@@ -7,8 +7,8 @@
 
 	<servlet>
 		<servlet-name>SyncZuulServlet</servlet-name>
-		<servlet-class>io.spring2go.zuul.servlet.SyncZuulServlet</servlet-class>
-		<!--async-supported>true</async-supported-->
+		<servlet-class>io.spring2go.zuul.servlet.AsyncZuulServlet</servlet-class>
+		<async-supported>true</async-supported>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>SyncZuulServlet</servlet-name>

@@ -10,7 +10,7 @@ class DebugModeSetter extends ZuulFilter {
 
     static final DynamicBooleanProperty couldSetDebug =
             DynamicPropertyFactory.getInstance().getBooleanProperty("zuul.could.set.debug", true);
-    static final DynamicBooleanProperty routingDebug =
+    static final DynamicBooleanProperty debugRequest =
             DynamicPropertyFactory.getInstance().getBooleanProperty("zuul.debug.request", false);
     static final DynamicStringProperty debugParameter =
             DynamicPropertyFactory.getInstance().getStringProperty("zuul.debug.parameter", "debugRequest");
@@ -30,7 +30,7 @@ class DebugModeSetter extends ZuulFilter {
             return false
         }
         if ("true".equals(RequestContext.currentContext.getRequest().getParameter(debugParameter.get()))) return true;
-        return routingDebug.get();
+        return debugRequest.get();
     }
 
     Object run() {

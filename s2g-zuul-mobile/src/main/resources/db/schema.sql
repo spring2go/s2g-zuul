@@ -1,4 +1,4 @@
-CREATE TABLE `filters` (
+CREATE TABLE `zuul_filter` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   `filter_id` varchar(45) DEFAULT NULL COMMENT '过滤器id',
   `revision` int(11) DEFAULT NULL COMMENT '版本',
