@@ -1,4 +1,4 @@
-package scripts.pre
+package io.spring2go.zuul.mobile;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -20,7 +20,7 @@ public class TestRouting extends ZuulFilter {
 
 	private static Logger logger = LoggerFactory.getLogger(TestRouting.class);
 
-	private static final AtomicReference<HashMap<String, URL>> routingTableRef = new AtomicReference<HashMap<String, URL>>();
+	private static final AtomicReference<HashMap<String, String>> routingTableRef = new AtomicReference<HashMap<String, String>>();
 
 	private static final DynamicStringProperty ROUTING_TABLE_STRING_PROPERTY = DynamicPropertyFactory.getInstance()
 			.getStringProperty("zuul.routing_table_string", null);
@@ -40,7 +40,7 @@ public class TestRouting extends ZuulFilter {
 
 	static void buildRoutingTable() {
 		logger.info("building routing table");
-		HashMap<String, URL> routingTable = new HashMap<String, URL>();
+		HashMap<String, String> routingTable = new HashMap<String, String>();
 		String routingTableString = ROUTING_TABLE_STRING_PROPERTY.get();
 		if (StringUtils.isEmpty(routingTableString)) {
 			logger.warn("routing table string is empty, nothing to build");
@@ -52,12 +52,8 @@ public class TestRouting extends ZuulFilter {
 			if (kvs.length == 2) {
 				String svcName = kvs[0];
 				String urlString = kvs[1];
-				try {
-					URL url = new URL(urlString);
-					routingTable.put(svcName, url);
-				} catch (MalformedURLException e) {
-					logger.error("malformed url : " + urlString);
-				}
+				routingTable.put(svcName, urlString);
+				logger.info("added route entry key = " + svcName + ", value = " + urlString);
 			}
 		}
 		if (routingTable.size() > 0) {
@@ -70,35 +66,48 @@ public class TestRouting extends ZuulFilter {
 
 	@Override
 	public boolean shouldFilter() {
-        RequestContext ctx = RequestContext.getCurrentContext();
+		RequestContext ctx = RequestContext.getCurrentContext();
 		return ctx.sendZuulResponse();
 	}
 
-	
 	// sample url
 	// http://api.spring2go.com/api/hello
 	@Override
 	public Object run() throws ZuulException {
 		RequestContext ctx = RequestContext.getCurrentContext();
 		String path = ctx.getRequest().getRequestURI();
+		String requestPath = "";
 		String serviceName = "";
+		String requestMethod = "";
 		int index = path.lastIndexOf("/api/");
 		if (index > 0) {
-			serviceName = path.substring(index + 5);
-			if (StringUtils.isNotEmpty(serviceName)) {
-				if (serviceName.indexOf("/") > 0) {
-					serviceName = serviceName.split("/")[0];
+			requestPath = path.substring(index + 5);
+			if (StringUtils.isNotEmpty(requestPath)) {
+				int index2 = requestPath.indexOf("/");
+				if (index2 > 0) {
+					serviceName = requestPath.substring(0, index2);
+					requestMethod = requestPath.substring(index2 + 1);
+				} else {
+					serviceName = requestPath;
 				}
 			}
 		}
 		if (StringUtils.isNotEmpty(serviceName)) {
-			URL url = routingTableRef.get().get(serviceName);
-			if (url != null) {
-				ctx.setRouteUrl(url);
+			String urlString = routingTableRef.get().get(serviceName);
+			if (StringUtils.isNotEmpty(urlString)) {
+				if (StringUtils.isNotEmpty(requestMethod)) {
+					urlString = urlString.endsWith("/") ? urlString + requestMethod : urlString + "/" + requestMethod;
+				}
+				URL url;
+				try {
+					url = new URL(urlString);
+					ctx.setRouteUrl(url);
+				} catch (MalformedURLException e) {
+					throw new ZuulException(e, "Malformed URL exception", 500, "Malformed URL exception");
+				}
 			}
 		}
 
-        		
 		if (ctx.getRouteUrl() == null) {
 			throw new ZuulException("No route found", 404, "No route found");
 		}

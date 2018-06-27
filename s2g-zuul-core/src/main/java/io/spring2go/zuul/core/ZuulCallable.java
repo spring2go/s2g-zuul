@@ -1,5 +1,6 @@
 package io.spring2go.zuul.core;
 
+import java.net.URL;
 import java.util.concurrent.Callable;
 
 import javax.servlet.AsyncContext;
@@ -227,9 +228,8 @@ public class ZuulCallable implements Callable {
 		}
 
 		if (zuulContext.sendZuulResponse()) {
-			String routeName = zuulContext.getRouteName();
-			if (routeName == null || routeName.equals("")) {
-				routeName = "unknown";
+			URL routeUrl = zuulContext.getRouteUrl();
+			if (routeUrl == null) {
 				LOGGER.warn("Unknown Route: [ {" + zuulContext.getRequest().getRequestURL() + "} ]");
 			}
 		}
