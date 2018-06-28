@@ -52,7 +52,7 @@ public class InitializeServletListener implements ServletContextListener {
 	public InitializeServletListener() {
 //		System.setProperty(Constants.DEPLOY_ENVIRONMENT, "test");
 //		System.setProperty(Constants.DEPLOYMENT_APPLICATION_ID, "mobile_zuul");
-		System.setProperty(Constants.DEPLOY_CONFIG_URL, "http://localhost:8080/configfiles/mobile_zuul/default/application");			
+//		System.setProperty(Constants.DEPLOY_CONFIG_URL, "http://localhost:8080/configfiles/mobile_zuul/default/application");			
 		String applicationID = ConfigurationManager.getConfigInstance().getString(Constants.DEPLOYMENT_APPLICATION_ID);
 		if (StringUtils.isEmpty(applicationID)) {
 			LOGGER.warn("Using default config!");
