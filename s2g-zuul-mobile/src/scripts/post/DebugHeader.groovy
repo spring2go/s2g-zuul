@@ -54,7 +54,7 @@ class DebugHeader extends ZuulFilter {
             }
         }
 
-        //Support CROS
+        //Support CORS
         headers.add(new Pair("Access-Control-Allow-Origin", "*"))
         headers.add(new Pair("Access-Control-Allow-Headers","Content-Type, Accept"))
 
