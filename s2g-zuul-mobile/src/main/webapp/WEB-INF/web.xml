@@ -6,12 +6,12 @@
 	<display-name>zuul-gateway</display-name>
 
 	<servlet>
-		<servlet-name>SyncZuulServlet</servlet-name>
+		<servlet-name>AsyncZuulServlet</servlet-name>
 		<servlet-class>io.spring2go.zuul.servlet.AsyncZuulServlet</servlet-class>
 		<async-supported>true</async-supported>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>SyncZuulServlet</servlet-name>
+		<servlet-name>AsyncZuulServlet</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 

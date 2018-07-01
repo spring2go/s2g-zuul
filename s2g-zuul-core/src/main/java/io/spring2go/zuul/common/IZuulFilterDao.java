@@ -55,7 +55,7 @@ public interface IZuulFilterDao {
     List<FilterInfo> getAllActiveFilters() throws Exception;
 
     /**
-     * sets a filter and revison as active in a "canary"
+     * sets a filter and revision as active in a "canary"
      * @param filterId
      * @param revision
      * @return the filter
