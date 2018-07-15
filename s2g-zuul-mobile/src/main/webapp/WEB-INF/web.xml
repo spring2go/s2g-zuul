@@ -19,14 +19,14 @@
 		<listener-class>io.spring2go.zuul.servlet.InitializeServletListener</listener-class>
 	</listener>
 
-	<!--filter>
+	<filter>
 		<filter-name>CatFilter</filter-name>
 		<filter-class>io.spring2go.zuul.servlet.CatServletFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>CatFilter</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping-->
+	</filter-mapping>
 
     <servlet>
         <servlet-name>scriptManager</servlet-name>

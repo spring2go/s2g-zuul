@@ -58,9 +58,6 @@ public class CatServletFilter implements Filter {
 
             Cat.logEvent("Service.method", request.getMethod(), Message.SUCCESS, request.getRequestURL().toString());
             Cat.logEvent("Service.client", request.getRemoteHost());
-            // for cross report
-            String clientApp = request.getHeader("X-S2G-CAT-APP");
-            Cat.logEvent("Service.app", clientApp == null ? "unknown" : clientApp);
 
             filterChain.doFilter(servletRequest, servletResponse);
 

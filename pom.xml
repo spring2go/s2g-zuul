@@ -27,7 +27,7 @@
 		<!-- <ribbon.version>2.2.2</ribbon.version> -->
 		<ribbon.version>0.3.13</ribbon.version>
 		<turbine.version>0.4</turbine.version>
-		<cat.version>1.4.0</cat.version>
+		<cat.version>2.0.0</cat.version>
 		<archaius.version>0.5.11</archaius.version>
 		<hystrix.version>1.4.12</hystrix.version>
 		<servlet.version>3.0.1</servlet.version>
@@ -38,9 +38,7 @@
 		<groovy.version>2.0.2</groovy.version>
 		<junit.version>4.11</junit.version>
 		<httpclient.version>4.3.3</httpclient.version>
-		<spring2go-tools.version>1.0</spring2go-tools.version>
-		<spring2go-metrics.version>1.0</spring2go-metrics.version>
-		<jetty.version>8.1.0.RC5</jetty.version>
+		<jetty.version>8.1.14.v20131031</jetty.version>
 		<commons-io.version>2.4</commons-io.version>
 		<okhttp.version>2.7.5</okhttp.version>
 		<commons-fileupload.version>1.2.2</commons-fileupload.version>
@@ -50,27 +48,23 @@
 		<netflix-commons.version>0.1.1</netflix-commons.version>
 		<mockito.version>1.8.5</mockito.version>
 	</properties>
-
+	
 	<repositories>
-		<repository>
-			<id>mvn-repo</id>
-			<url>https://raw.githubusercontent.com/spring2go/mvn-repo/master</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
+	      <repository>
+	         <id>central</id>
+	         <name>Maven2 Central Repository</name>
+	         <layout>default</layout>
+	         <url>http://repo1.maven.org/maven2</url>
+	      </repository>
+	      <repository>
+	         <id>unidal.releases</id>
+	         <url>http://unidal.org/nexus/content/repositories/releases/</url>
+	      </repository>
 	</repositories>
+	
 
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
-				<groupId>io.spring2go.tools</groupId>
-				<artifactId>spring2go-tools</artifactId>
-				<version>${spring2go-tools.version}</version>
-			</dependency>
 
 			<dependency>
 				<groupId>com.alibaba</groupId>
@@ -198,6 +192,12 @@
 				<artifactId>hystrix-core</artifactId>
 				<version>${hystrix.version}</version>
 			</dependency>
+			
+			<dependency>
+				<groupId>com.netflix.hystrix</groupId>
+				<artifactId>hystrix-metrics-event-stream</artifactId>
+				<version>${hystrix.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>com.netflix.ribbon</groupId>
@@ -258,6 +258,19 @@
 				<artifactId>s2g-zuul-core</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-server</artifactId>
+				<version>${jetty.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-webapp</artifactId>
+				<version>${jetty.version}</version>
+			</dependency>
+			
 		</dependencies>
 	</dependencyManagement>
 

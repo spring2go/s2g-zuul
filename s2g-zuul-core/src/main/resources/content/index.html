@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+    <head>
+        <style type="text/css">
+            #top{
+                margin:0px 0px 20px;
+                padding: 5px 5px;
+                border-bottom: 2px solid #bbb;
+            }
+            #top a{
+                font-size:16px;
+                font-weight: bold;
+                padding: 2px 5px;
+                text-decoration: none;
+            }
+            #content{
+                padding:0 0 0 10px;
+                font-size: 12px;
+            }
+            #content div.key{
+                color: #196eaa;
+                float: left;
+                font-weight: bold;
+            }
+            #content div.value{
+                color: #444;
+                margin:0 0 10px 200px;
+            }
+            .active{
+                background-color: #12a1cc;
+                color: #fff;
+            }
+        </style>
+        <script src="/jquery-2.1.1.min.js"></script>
+        <script>
+            function loadStatus(){
+                $.get('/api/status',{dataType:'json'},function(res){
+                    var c = $('#content');
+                    var prefix;
+                    c.empty();
+                    for(prop in res){
+                        var n = prop.split(" ")[0];
+                        if(prefix  &&  prefix!=n){
+                            c.append($('<div class="key">'+'  &nbsp; '+'</div><div class="value">'+'  &nbsp;  '+'</div>'));
+                        }
+                        c.append($('<div class="key">'+prop+':</div><div class="value">'+res[prop]+'</div>'));
+                        prefix=n;
+                    }
+                });
+            }
+
+            function loadEnv(){
+                $.get('/api/env',{dataType:'json'},function(res){
+                    var c = $('#content');
+                    c.empty();
+                    for(prop in res){
+                        c.append($('<div class="key">'+prop+':</div><div class="value">'+res[prop]+'</div>'));
+                    }
+                });
+            }
+
+            function loadProps(){
+                $.get('/api/props',{dataType:'json'},function(res){
+                    var c = $('#content');
+                    c.empty();
+                    for(prop in res){
+                        c.append($('<div class="key">'+prop+':</div><div class="value">'+res[prop]+'</div>'));
+                    }
+                });
+            }
+
+            $(function(){
+                $('#status').click(function(){
+                    $('#status').addClass("active");
+                    $('#env').removeClass("active");
+                    $('#config').removeClass("active");
+                    loadStatus();
+                });
+                $('#env').click(function(){
+                    $('#status').removeClass("active");
+                    $('#env').addClass("active");
+                    $('#config').removeClass("active");
+                    loadEnv();
+                });
+                $('#config').click(function(){
+                    $('#status').removeClass("active");
+                    $('#env').removeClass("active");
+                    $('#config').addClass("active");
+                    loadProps();
+                });
+                loadStatus();
+            })
+        </script>
+    </head>
+    <body>
+    <div id="top">
+        <a id="status" class="active" href="#">Status</a>
+        <a id="env" href="#">Environment</a>
+        <a id="config" href="#">Configuration</a>
+    </div>
+    <div id="content">
+    </div>
+    </body>
+</html>

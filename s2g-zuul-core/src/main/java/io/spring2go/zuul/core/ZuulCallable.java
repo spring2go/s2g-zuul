@@ -45,8 +45,8 @@ public class ZuulCallable implements Callable {
 		RequestContext zuulContext = RequestContext.getCurrentContext();
 		long start = System.currentTimeMillis();
 		try {
-			tran.setStatus(Transaction.SUCCESS);
 			service(ctx.getRequest(), ctx.getResponse());
+			tran.setStatus(Transaction.SUCCESS);
 		} catch (Throwable t) {
 			LOGGER.error("ZuulCallable execute error.", t);
 			Cat.logError(t);
@@ -176,7 +176,7 @@ public class ZuulCallable implements Callable {
 	 * @param e
 	 */
 	private void error(ZuulException e) {
-		Transaction tran = Cat.getProducer().newTransaction("ZuulCallable", "postRoute");
+		Transaction tran = Cat.getProducer().newTransaction("ZuulCallable", "errorRoute");
 		try {
 			RequestContext.getCurrentContext().setThrowable(e);
 			zuulRunner.error();

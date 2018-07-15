@@ -13,11 +13,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>io.spring2go.tools</groupId>
-			<artifactId>spring2go-tools</artifactId>
-		</dependency>
-	
-		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 		</dependency>
@@ -45,6 +40,16 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-webapp</artifactId>
 		</dependency>
 
 		<dependency>
@@ -85,6 +90,11 @@
 		<dependency>
 			<groupId>com.netflix.hystrix</groupId>
 			<artifactId>hystrix-core</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.netflix.hystrix</groupId>
+			<artifactId>hystrix-metrics-event-stream</artifactId>
 		</dependency>
 
 		<dependency>

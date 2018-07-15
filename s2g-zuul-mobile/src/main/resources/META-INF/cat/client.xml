@@ -2,9 +2,9 @@
 <config mode="client" enabled="true">
 
     <!-- 配置Domain ID-->
-    <domain id="mobile_zuul.spring2go.com" enabled="true" max-message-size="1000"/>
+    <domain id="mobile-zuul-gateway" enabled="true" max-message-size="1000"/>
 
     <servers>
-        <server ip="cat.spring2go.com" port="2280" http-port="80"></server>
+        <server ip="127.0.0.1" port="2280" http-port="8080"></server>
     </servers>
 </config>

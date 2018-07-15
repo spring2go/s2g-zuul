@@ -51,7 +51,6 @@ public class SendResponse extends ZuulFilter {
 		InputStream inStream = null;
 		OutputStream outStream = null;
 		try {
-			tran.setStatus(Transaction.SUCCESS);
 			addResponseHeaders();
 			outStream = servletResponse.getOutputStream();
 			if (responseBody != null) {
@@ -83,6 +82,8 @@ public class SendResponse extends ZuulFilter {
                 }
             }
 			writeResponse(inStream, outStream);
+			
+			tran.setStatus(Transaction.SUCCESS);
 			
 		} catch (Throwable t) {
 			tran.setStatus(t);

@@ -2,6 +2,9 @@ package io.spring2go.zuul.hystrix;
 
 import com.dianping.cat.Cat;
 import com.dianping.cat.Cat.Context;
+import com.dianping.cat.CatConstants;
+import com.dianping.cat.message.Message;
+import com.dianping.cat.message.Transaction;
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.HystrixCommandKey;
@@ -44,14 +47,24 @@ public class ZuulRequestCommandForSemaphoreIsolation extends HystrixCommand<Http
 
     @Override
     protected HttpResponse run() throws Exception {
+    	
+    	Transaction t = Cat.newTransaction(CatConstants.TYPE_REMOTE_CALL, httpUriRequest.getURI().toString());
+    	
         try {
-            return forward();
+        	HttpResponse response = forward();
+            t.setStatus(Transaction.SUCCESS);
+            return response;
         } catch (IOException e) {
-            throw e;
+            t.setStatus(e);
+            Cat.logError(e);
+        	throw e;
+        } finally {
+        	t.complete();
         }
     }
 
     HttpResponse forward() throws IOException {
+    	
     	Context ctx = new CatContext();
     	Cat.logRemoteCallClient(ctx);
     	httpUriRequest.addHeader(Constants.CAT_ROOT_MESSAGE_ID, ctx.getProperty(Cat.Context.ROOT));
