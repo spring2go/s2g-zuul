@@ -24,12 +24,12 @@
 		<log4j.version>1.2.17</log4j.version>
 		<mysql.version>5.1.21</mysql.version>
 		<logback.version>1.1.1</logback.version>
-		<!-- <ribbon.version>2.2.2</ribbon.version> -->
+		<!--ribbon.version>2.2.2</ribbon.version-->
 		<ribbon.version>0.3.13</ribbon.version>
 		<turbine.version>0.4</turbine.version>
-		<cat.version>2.0.0</cat.version>
+		<cat.version>3.0.0</cat.version>
 		<archaius.version>0.5.11</archaius.version>
-		<hystrix.version>1.4.12</hystrix.version>
+		<hystrix.version>1.4.26</hystrix.version>
 		<servlet.version>3.0.1</servlet.version>
 		<HikariCP.version>1.3.3</HikariCP.version>
 		<fastjson.version>1.2.7</fastjson.version>
@@ -50,16 +50,16 @@
 	</properties>
 	
 	<repositories>
-	      <repository>
-	         <id>central</id>
-	         <name>Maven2 Central Repository</name>
-	         <layout>default</layout>
-	         <url>http://repo1.maven.org/maven2</url>
-	      </repository>
-	      <repository>
-	         <id>unidal.releases</id>
-	         <url>http://unidal.org/nexus/content/repositories/releases/</url>
-	      </repository>
+	  <repository>
+	     <id>central</id>
+	     <name>Maven2 Central Repository</name>
+	     <layout>default</layout>
+	     <url>http://repo1.maven.org/maven2</url>
+	  </repository>
+	  <repository>
+	     <id>unidal.releases</id>
+	     <url>http://cat.meituan.com/nexus/content/repositories/releases/</url>
+	  </repository>
 	</repositories>
 	
 
