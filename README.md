@@ -29,4 +29,4 @@ Spring2go定制版Netflix zuul
 
     > 如果不实际使用CAT，只是验证Zuul功能，则上面CAT服务器地址可以随意填；如果要实际启用CAT服务器，则上面需要填写你的CAT server地址。
 
-
+注意，上述目录和zuul在要在同一逻辑盘下。
