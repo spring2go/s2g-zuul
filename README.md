@@ -6,6 +6,11 @@ Spring2go定制版Netflix zuul
 1. 本项目为微服务课程讲解开发，代码仅供学习参考，如需生产化，需要做生产化扩展+严格测试！！！另外请考虑Spring Cloud Zuul。
 2. 注意本项目依赖[CAT3.0](https://github.com/dianping/cat)客户端，启动前需要先CAT客户端配置工作，否则Servlet会启不来，步骤如下描述。
 
+## 建议
+
+s2g-zuul源码建议使用较新版本的[Eclipse IDE for Java EE Developer](https://www.eclipse.org/downloads/packages/release/2019-03/r/eclipse-ide-enterprise-java-developers
+)进行导入，它可以自动感知Servlet Web项目，可在Eclipse+Tomcat里头直接调试源码，方便排查问题。
+
 ## 启动 cat 客户端前的准备工作
 
 1. 创建 `/data/appdatas/cat` 目录
