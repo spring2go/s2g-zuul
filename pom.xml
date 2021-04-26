@@ -39,7 +39,7 @@
 		<junit.version>4.11</junit.version>
 		<httpclient.version>4.3.3</httpclient.version>
 		<jetty.version>8.1.14.v20131031</jetty.version>
-		<commons-io.version>2.4</commons-io.version>
+		<commons-io.version>2.7</commons-io.version>
 		<okhttp.version>2.7.5</okhttp.version>
 		<commons-fileupload.version>1.2.2</commons-fileupload.version>
 		<json.version>20090211</json.version>
