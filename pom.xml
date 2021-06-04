@@ -37,7 +37,7 @@
 		<jersey.version>1.11</jersey.version>
 		<groovy.version>2.0.2</groovy.version>
 		<junit.version>4.11</junit.version>
-		<httpclient.version>4.3.3</httpclient.version>
+		<httpclient.version>4.5.13</httpclient.version>
 		<jetty.version>8.1.14.v20131031</jetty.version>
 		<commons-io.version>2.4</commons-io.version>
 		<okhttp.version>2.7.5</okhttp.version>
